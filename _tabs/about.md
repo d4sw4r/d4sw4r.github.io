@@ -3,6 +3,6 @@
 icon: fas fa-info-circle
 order: 4
 ---
+# About me
 
-> Add Markdown syntax content to file `_tabs/about.md`{: .filepath } and it will show up on this page.
-{: .prompt-tip }
+Hi, i am Dennis from Germany/Berlin. I work in IT for more then 10 years now while I own a PC for more then 25 years.
