@@ -85,7 +85,7 @@ kubectl cluster-info dump                                             # Dump cur
 kubectl cluster-info dump --output-directory=/path/to/cluster-state   # Dump current cluster state to /path/to/cluster-state
 
 ```
-## maifests
+## manifests
 
 ```yml
 # configmap
