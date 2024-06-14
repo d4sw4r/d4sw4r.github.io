@@ -1,12 +1,12 @@
 ---
-title: Tailscale: A Zero Trust Network Made Easy
+title: Tailscale A Zero Trust Network Made Easy
 date: 2024-06-14 20:51
 categories: [k8s, kubernetes, docker, ansible, network, vpn]
 tags: [kubernetes, k8s , docker, ansible, network]     # TAG names should always be lowercase
 ---
 
 
-![Tkubernetes is beautiful!](/assets/img/tailsclae_network.png "tailscale-network")
+![Tkubernetes is beautiful!](/assets/img/tailscale_network.png "tailscale-network")
 
 ---
 
