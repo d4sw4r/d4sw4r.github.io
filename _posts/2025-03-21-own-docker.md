@@ -61,7 +61,7 @@ func runContainer() {
 
 ## How It Works
 
-### Command Line Arguments:
+#### Command Line Arguments:
 The program expects a command-line argument. When run with run, it calls the runContainer function to start the containerized process.
 
 #### Executing the Container:
