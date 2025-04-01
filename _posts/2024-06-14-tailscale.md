@@ -2,7 +2,7 @@
 title: Tailscale A Zero Trust Network Made Easy
 date: 2024-06-14 20:51
 categories: [k8s, kubernetes, docker, ansible, network, vpn]
-tags: [kubernetes, k8s , docker, ansible, network]     # TAG names should always be lowercase
+tags: [kubernetes, k8s , docker, ansible, network, tailscale, wireguard]     # TAG names should always be lowercase
 ---
 
 
