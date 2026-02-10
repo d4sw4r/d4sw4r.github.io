@@ -1,12 +1,13 @@
 ---
 title: Deploy Prometheus to k8s with operator using kustomize
+description: Step-by-step guide to deploying Prometheus Operator with Kustomize. Build your own monitoring stack with Alertmanager instead of using bloated prebuilt solutions.
 date: 2024-02-13 17:10
 categories: [k8s, kubernetes, k3s, prometheus, alertmanager, kustomize]
-tags: [kubernetes, k8s , prometheus, alertmanager, kustomize]     # TAG names should always be lowercase
+tags: [kubernetes, k8s, prometheus, alertmanager, kustomize]
 ---
 
 
-![Tkubernetes is beautiful!](https://avatars.githubusercontent.com/u/66682517?s=280&v=4 "Prometheus-operator")
+![Prometheus Operator logo](/assets/img/prometheus-operator.png "Prometheus Operator")
 
 ---
 # Deploy Prometheus to k8s with operator using kustomize

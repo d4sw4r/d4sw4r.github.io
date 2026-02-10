@@ -1,12 +1,13 @@
 ---
 title: How to write your own Docker
+description: Build a minimal container runtime in Go. Learn how chroot, namespaces, and cgroups work together to create process isolation like Docker.
 date: 2025-03-31 20:30
 categories: [k8s, kubernetes, docker, go]
-tags: [k8s, kubernetes, docker, go]     # TAG names should always be lowercase
+tags: [k8s, kubernetes, docker, go]
 ---
 
 
-![Tkubernetes is beautiful!](/assets/img/own_docker.png "vpn-4-pennys-img")
+![Building your own container runtime with Go](/assets/img/own_docker.png "Write your own Docker")
 
 ---
 ## How to write your own Docker

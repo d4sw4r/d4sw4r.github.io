@@ -1,12 +1,13 @@
 ---
 title: Kubernetes cheatsheet
+description: Essential kubectl commands and manifest examples for daily Kubernetes administration. Quick reference for pods, deployments, services, ingress, and storage.
 date: 2023-11-10 19:10
 categories: [k8s, kubernetes, k3s]
-tags: [kubernetes, k8s , cheatsheet]     # TAG names should always be lowercase
+tags: [kubernetes, k8s, cheatsheet]
 ---
 
 
-![Tkubernetes is beautiful!](https://upload.wikimedia.org/wikipedia/commons/6/67/Kubernetes_logo.svg "k8s")
+![Kubernetes logo](/assets/img/kubernetes-logo.svg "Kubernetes")
 
 ---
 

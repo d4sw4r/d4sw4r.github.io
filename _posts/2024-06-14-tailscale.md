@@ -1,12 +1,13 @@
 ---
 title: Tailscale A Zero Trust Network Made Easy
+description: Complete guide to Tailscale mesh VPN with WireGuard. Covers cloud-init setup, Docker integration, Headscale self-hosting, exit nodes, and Ansible automation.
 date: 2024-06-14 20:51
 categories: [k8s, kubernetes, docker, ansible, network, vpn]
-tags: [kubernetes, k8s , docker, ansible, network, tailscale, wireguard]     # TAG names should always be lowercase
+tags: [kubernetes, k8s, docker, ansible, network, tailscale, wireguard]
 ---
 
 
-![Tkubernetes is beautiful!](/assets/img/tailscale_network.png "tailscale-network")
+![Tailscale mesh network topology diagram](/assets/img/tailscale_network.png "Tailscale Network")
 
 ---
 
