@@ -1,12 +1,13 @@
 ---
 title: Predict the Future with Prometheus
+description: Learn how to use predict_linear in PromQL to forecast CPU, memory, and network usage. Practical examples for proactive monitoring and capacity planning.
 date: 2024-06-10 20:51
 categories: [k8s, kubernetes, prometheus, alertmanager, promql]
-tags: [kubernetes, k8s , prometheus, alertmanager, promql]     # TAG names should always be lowercase
+tags: [kubernetes, k8s, prometheus, alertmanager, promql]
 ---
 
 
-![Tkubernetes is beautiful!](/assets/img/predict_cpu_usage.png "Prometheus-graph")
+![Prometheus predict_linear graph showing forecasted CPU usage](/assets/img/predict_cpu_usage.png "Prometheus predict_linear")
 
 ---
 

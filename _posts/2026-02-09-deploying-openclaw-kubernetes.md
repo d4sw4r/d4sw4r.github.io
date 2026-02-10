@@ -1,5 +1,6 @@
 ---
 title: Deploying OpenClaw on Kubernetes - Your AI Assistant in the Cloud
+description: Complete guide to deploying OpenClaw AI assistant on Kubernetes. Includes manifests for ConfigMaps, Secrets, PVCs, Deployments, and security best practices.
 date: 2026-02-09 15:00
 categories: [kubernetes, devops]
 tags: [kubernetes, k8s, openclaw, ai, assistant, deployment, docker, helm]
