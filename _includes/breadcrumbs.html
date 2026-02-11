@@ -1,0 +1,25 @@
+<!-- Breadcrumb Navigation -->
+{% if page.layout == "post" %}
+<nav aria-label="breadcrumb" style="margin: 1rem 0; padding: 0.75rem 1rem; background: var(--main-bg, #f8f9fa); border-radius: 4px;">
+  <ol style="list-style: none; display: flex; flex-wrap: wrap; align-items: center; margin: 0; padding: 0; font-size: 0.9rem;">
+    <li style="display: flex; align-items: center;">
+      <a href="{{ site.url }}" style="color: var(--link-color, #007bff); text-decoration: none;">
+        <svg style="width: 16px; height: 16px; margin-right: 0.25rem;" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        Home
+      </a>
+      <span style="margin: 0 0.5rem; color: #999;">›</span>
+    </li>
+    {% for category in page.categories %}
+    <li style="display: flex; align-items: center;">
+      <a href="{{ site.url }}/categories/{{ category | slugify }}/" style="color: var(--link-color, #007bff); text-decoration: none;">
+        {{ category | capitalize }}
+      </a>
+      <span style="margin: 0 0.5rem; color: #999;">›</span>
+    </li>
+    {% endfor %}
+    <li style="color: #666;" aria-current="page">
+      {{ page.title | truncate: 50 }}
+    </li>
+  </ol>
+</nav>
+{% endif %}
