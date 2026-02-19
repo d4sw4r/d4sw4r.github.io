@@ -1,6 +1,6 @@
 ---
-title: "PicoClaw + Home Assistant: Ein KI-Agent für dein Smart Home"
-description: "PicoClaw ist ein ultraleichter AI-Agent in Go, der auf $10-Hardware läuft. Wie er Home Assistant perfekt ergänzt — ohne Cloud, ohne Overhead."
+title: "PicoClaw + Home Assistant: An AI Agent for Your Smart Home"
+description: "PicoClaw is an ultra-lightweight AI agent written in Go that runs on $10 hardware. How it perfectly complements Home Assistant — no cloud, no overhead."
 date: 2026-02-19 10:00
 categories: [ai, smarthome]
 tags: ["ai", "homeassistant", "picoclaw", "smarthome", "automation"]
@@ -10,53 +10,53 @@ tags: ["ai", "homeassistant", "picoclaw", "smarthome", "automation"]
 
 ---
 
-# PicoClaw + Home Assistant: Ein KI-Agent für dein Smart Home
+# PicoClaw + Home Assistant: An AI Agent for Your Smart Home
 
-Ich liebe Home Assistant. Wirklich. Aber Hand aufs Herz: Sobald du anfängst, AI in dein Smart Home zu integrieren, wird es schnell unübersichtlich, ressourcenhungrig — und ehrlich gesagt — nervig. Genau da kommt [PicoClaw](https://picoclaw.io) ins Spiel.
+I love Home Assistant. Genuinely. But let's be honest: the moment you start integrating AI into your smart home, things get complicated fast — resource-hungry, messy, and frankly — annoying. That's exactly where [PicoClaw](https://picoclaw.io) comes in.
 
-## Was ist PicoClaw?
+## What is PicoClaw?
 
-PicoClaw ist ein ultraleichter AI-Agent, entwickelt von Sipeed, komplett in Go geschrieben. Das Besondere: Er läuft auf Hardware, die du für 10 Dollar kaufst. Raspberry Pi Zero, LicheeRV-Nano, ein vergessener SBC in der Schublade — alles kein Problem. Der Ressourcenbedarf ist absurd gering: **unter 10 MB RAM**, **Boot in unter einer Sekunde**, und er läuft auf RISC-V, ARM und x86_64.
+PicoClaw is an ultra-lightweight AI agent, developed by Sipeed, written entirely in Go. What makes it special: it runs on hardware you can buy for 10 dollars. Raspberry Pi Zero, LicheeRV-Nano, some forgotten SBC sitting in a drawer — all perfectly fine. The resource footprint is absurdly low: **under 10 MB RAM**, **boots in under a second**, and it runs on RISC-V, ARM, and x86_64.
 
-Die Kommunikation läuft über Telegram oder Discord. LLM-Anfragen werden an externe Provider (OpenAI, Anthropic, etc.) via API-Key weitergegeben — du bringst also dein eigenes Gehirn mit. Das GitHub-Repo findest du unter [sipeed/picoclaw](https://github.com/sipeed/picoclaw).
+Communication happens via Telegram or Discord. LLM requests are forwarded to external providers (OpenAI, Anthropic, etc.) via API key — you bring your own brain. The GitHub repo is at [sipeed/picoclaw](https://github.com/sipeed/picoclaw).
 
-Inspiriert vom ursprünglichen nanobot-Projekt, aber komplett in Go neu geschrieben. Sauber, schlank, und direkt auf den Punkt.
+Inspired by the original nanobot project, but completely rewritten in Go. Clean, lean, and straight to the point.
 
-## Das Problem mit AI in Home Assistant
+## The Problem with AI in Home Assistant
 
-Home Assistant hat in den letzten Jahren ordentlich aufgeholt. Es gibt Integrationen für OpenAI, lokale LLMs via Ollama, Assist-Pipelines — alles da. Aber:
+Home Assistant has come a long way in recent years. There are integrations for OpenAI, local LLMs via Ollama, Assist pipelines — it's all there. But:
 
-**Das Problem ist die Komplexität.** Eine sauber laufende AI-Assist-Pipeline braucht:
-- Einen lokalen Whisper-Container für Speech-to-Text (RAM: locker 2–4 GB)
-- Piper für Text-to-Speech
-- Ollama für lokale Inferenz (wenn du keine Cloud willst) — nochmal 4–8 GB
-- Konversationsagenten, die korrekt konfiguriert sein wollen
-- Intents, die du selbst definieren musst
+**The problem is complexity.** A cleanly running AI Assist pipeline requires:
+- A local Whisper container for Speech-to-Text (RAM: easily 2–4 GB)
+- Piper for Text-to-Speech
+- Ollama for local inference (if you want to avoid the cloud) — another 4–8 GB
+- Conversation agents that need to be correctly configured
+- Intents that you have to define yourself
 
-Das ist alles machbar. Aber wenn du nur willst, dass dir dein Smart Home auf Telegram schreibt *"Die Temperatur im Keller ist seit 3 Stunden unter 10°C"* oder du tippen kannst *"Licht im Wohnzimmer aus"* — brauchst du das alles nicht.
+All of that is doable. But if all you want is for your smart home to message you on Telegram *"The basement temperature has been below 10°C for 3 hours"* or for you to type *"Turn off the living room lights"* — you don't need any of that.
 
-Und auf einem Raspberry Pi 4, auf dem HA schon ordentlich zu tun hat, willst du keinen Ollama-Stack draufpacken.
+And on a Raspberry Pi 4 that's already working hard running HA, you really don't want to throw an Ollama stack on top.
 
-## PicoClaw als schlanke Lösung
+## PicoClaw as a Lean Solution
 
-PicoClaw löst genau dieses Problem: Du nimmst einen Raspberry Pi Zero 2W für 15 Euro, steckst PicoClaw drauf, und hast einen AI-Agent, der:
+PicoClaw solves exactly this problem: grab a Raspberry Pi Zero 2W for 15 euros, put PicoClaw on it, and you've got an AI agent that:
 
-1. Über Telegram mit dir kommuniziert
-2. Deine Home Assistant REST API abfragt
-3. Entitäten steuert
-4. Cron-Jobs ausführt
-5. Webhooks von HA verarbeitet
+1. Communicates with you via Telegram
+2. Queries your Home Assistant REST API
+3. Controls entities
+4. Runs cron jobs
+5. Processes webhooks from HA
 
-Der gesamte Stack bootet in einer Sekunde, zieht kaum Strom, und läuft stabil im Dauerbetrieb. Die eigentliche KI-Intelligenz kommt von einem externen LLM-Provider — du zahlst nur, was du tatsächlich nutzt.
+The entire stack boots in one second, draws barely any power, and runs stably 24/7. The actual AI intelligence comes from an external LLM provider — you only pay for what you actually use.
 
-### Setup in fünf Minuten
+### Setup in Five Minutes
 
-PicoClaw per Binary herunterladen und mit einer simplen Config-Datei starten:
+Download PicoClaw as a binary and start it with a simple config file:
 
 ```yaml
 # picoclaw.yaml
 telegram:
-  token: "DEIN_BOT_TOKEN"
+  token: "YOUR_BOT_TOKEN"
   allowed_users: [12345678]
 
 llm:
@@ -67,123 +67,123 @@ llm:
 tools:
   - name: ha_rest
     base_url: "http://homeassistant.local:8123"
-    token: "DEIN_HA_LONG_LIVED_TOKEN"
+    token: "YOUR_HA_LONG_LIVED_TOKEN"
 ```
 
-Fertig. Mehr braucht es nicht.
+Done. That's all it takes.
 
-## Konkrete Anwendungsfälle
+## Practical Use Cases
 
-### 1. Sprachgesteuerte Automatisierungen via Telegram
+### 1. Voice-Controlled Automations via Telegram
 
-Du schreibst deinem Bot auf Telegram: *"Mach die Heizung im Büro aus und sag mir, wie warm es gerade ist."*
+You message your bot on Telegram: *"Turn off the office heating and tell me how warm it is right now."*
 
-PicoClaw fragt das LLM, das LLM entscheidet: REST API aufrufen, Thermostat-Entität lesen, Heizung abschalten. Antwort zurück an Telegram. Das ist kein Magic — das ist einfach ein AI-Agent mit Tool-Calling, der deine HA-API versteht.
+PicoClaw asks the LLM, the LLM decides: call the REST API, read the thermostat entity, turn off the heating. Response back to Telegram. There's no magic here — it's simply an AI agent with tool calling that understands your HA API.
 
-### 2. Smarte Benachrichtigungen
+### 2. Smart Notifications
 
-Klassischer Use Case: Du willst nicht jede Automation selbst bauen. Stattdessen gibst du dem Agenten Kontext:
+Classic use case: you don't want to build every automation yourself. Instead, you give the agent some context:
 
-> "Wenn das Küchenfenster seit mehr als 30 Minuten offen ist und die Außentemperatur unter 5°C liegt, schick mir eine Telegram-Nachricht."
+> "If the kitchen window has been open for more than 30 minutes and the outside temperature is below 5°C, send me a Telegram message."
 
-PicoClaw kann per Cron periodisch den Zustand prüfen und intelligent benachrichtigen — nicht einfach bei jedem Event, sondern *wenn es wirklich relevant ist*.
+PicoClaw can periodically check the state via cron and notify you intelligently — not on every event, but *when it's actually relevant*.
 
-### 3. HA REST API abfragen und Entitäten steuern
+### 3. Querying the HA REST API and Controlling Entities
 
-Die Home Assistant REST API ist straightforward. PicoClaw kann direkt damit interagieren:
+The Home Assistant REST API is straightforward. PicoClaw can interact with it directly:
 
 ```bash
-# Zustand einer Entität abfragen
+# Query the state of an entity
 curl -s \
-  -H "Authorization: Bearer DEIN_TOKEN" \
+  -H "Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   http://homeassistant.local:8123/api/states/sensor.living_room_temperature
 
-# Ergebnis (vereinfacht):
+# Result (simplified):
 # {
 #   "state": "21.5",
 #   "attributes": { "unit_of_measurement": "°C" }
 # }
 
-# Service aufrufen — Licht einschalten
+# Call a service — turn on a light
 curl -s -X POST \
-  -H "Authorization: Bearer DEIN_TOKEN" \
+  -H "Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
-  -d '{"entity_id": "light.wohnzimmer"}' \
+  -d '{"entity_id": "light.living_room"}' \
   http://homeassistant.local:8123/api/services/light/turn_on
 ```
 
-PicoClaw bekommt diese API als Tool, das LLM entscheidet selbst, wann und mit welchen Parametern es aufgerufen wird. Du musst keine Intents schreiben.
+PicoClaw gets this API as a tool, and the LLM decides on its own when and with which parameters to call it. You don't have to write any intents.
 
-### 4. Cron-Jobs für Energieberichte
+### 4. Cron Jobs for Energy Reports
 
-Jeden Morgen um 7:30 Uhr eine Zusammenfassung des gestrigen Stromverbrauchs direkt auf Telegram — das klingt nach viel Arbeit. Mit PicoClaw ist es ein Einzeiler:
+A daily summary of yesterday's power consumption delivered to Telegram at 7:30 AM — sounds like a lot of work. With PicoClaw, it's a one-liner:
 
 ```yaml
 crons:
   - schedule: "30 7 * * *"
     prompt: >
-      Frage den Stromzähler (sensor.stromzaehler_gestern_kwh) und 
-      den Solarertrag (sensor.solar_gestern_kwh) ab.
-      Schreib eine kurze Zusammenfassung auf Deutsch, ob wir mehr 
-      produziert oder verbraucht haben.
+      Query the electricity meter (sensor.power_meter_yesterday_kwh) and 
+      the solar yield (sensor.solar_yesterday_kwh).
+      Write a short summary in English of whether we produced more 
+      or consumed more power.
 ```
 
-Das LLM formatiert den Bericht, rechnet die Differenz aus, und du kriegst morgens eine sinnvolle Nachricht statt roher Sensorwerte.
+The LLM formats the report, calculates the difference, and you get a meaningful morning message instead of raw sensor values.
 
-### 5. Webhook-Trigger: HA → PicoClaw → Aktion
+### 5. Webhook Trigger: HA → PicoClaw → Action
 
-Home Assistant kann Webhooks feuern — und PicoClaw kann sie empfangen. Beispiel: Wenn der Bewegungsmelder nachts um 3 Uhr anschlägt, soll nicht einfach eine stupide Notification kommen, sondern der Agent soll *einschätzen*, ob das verdächtig ist (niemand ist laut Presence Detection zu Hause?) und entsprechend reagieren.
+Home Assistant can fire webhooks — and PicoClaw can receive them. Example: when the motion sensor triggers at 3 AM, instead of a dumb notification, the agent should *evaluate* whether this is suspicious (is nobody home according to Presence Detection?) and react accordingly.
 
 ```yaml
 # In Home Assistant: Automation
 trigger:
   - platform: state
-    entity_id: binary_sensor.bewegungsmelder_flur
+    entity_id: binary_sensor.hallway_motion
     to: "on"
 action:
   - service: rest_command.picoclaw_webhook
     data:
       event: "motion_detected"
-      sensor: "binary_sensor.bewegungsmelder_flur"
-      presence: "{{ states('input_boolean.jemand_zuhause') }}"
+      sensor: "binary_sensor.hallway_motion"
+      presence: "{{ states('input_boolean.someone_home') }}"
       time: "{{ now().strftime('%H:%M') }}"
 ```
 
-PicoClaw empfängt den Webhook, schickt die Daten ans LLM, und das entscheidet: Alarm auslösen, Licht anmachen, oder einfach ignorieren. Kontextbasiert. Nicht regelbasiert.
+PicoClaw receives the webhook, sends the data to the LLM, and it decides: trigger an alarm, turn on the lights, or simply ignore it. Context-based. Not rule-based.
 
-## Technische Integration: HA Long-Lived Token
+## Technical Integration: HA Long-Lived Token
 
-Für den Zugriff auf die HA REST API brauchst du einen Long-Lived Access Token. Den holst du dir in HA unter:
+To access the HA REST API, you need a Long-Lived Access Token. You get it in HA under:
 
-**Profil → Sicherheit → Long-Lived Access Tokens → Token erstellen**
+**Profile → Security → Long-Lived Access Tokens → Create Token**
 
-Diesen Token packst du in die PicoClaw-Config (oder als Umgebungsvariable) und schon kann der Agent alle Entitäten abfragen und Services aufrufen — inklusive Automationen triggern, Skripte starten, Szenen aktivieren.
+Put this token in the PicoClaw config (or as an environment variable) and the agent can query all entities and call services — including triggering automations, starting scripts, and activating scenes.
 
 ```bash
-# Alle Entitäten auflisten — gut zum Debuggen
+# List all entities — useful for debugging
 curl -s \
-  -H "Authorization: Bearer DEIN_TOKEN" \
+  -H "Authorization: Bearer YOUR_TOKEN" \
   http://homeassistant.local:8123/api/states | \
   python3 -m json.tool | head -50
 ```
 
-Ein Tipp aus der Praxis: Leg dir in HA einen dedizierten User für PicoClaw an, mit eingeschränkten Rechten. Nicht alles braucht Admin-Zugriff.
+A practical tip: create a dedicated user in HA for PicoClaw with restricted permissions. Not everything needs admin access.
 
-## Was PicoClaw *nicht* ersetzt
+## What PicoClaw Does *Not* Replace
 
-Kurz zur Einordnung: PicoClaw ist kein Ersatz für Home Assistant. HA bleibt das Herzstück — die Automationen, die Dashboards, die Geräteintegration, die Presence Detection, die History. Das alles bleibt in HA.
+Quick reality check: PicoClaw is not a replacement for Home Assistant. HA remains the heart of it all — the automations, the dashboards, device integrations, presence detection, history. All of that stays in HA.
 
-PicoClaw ist der intelligente Assistent *daneben*. Der Typ, dem du auf Telegram schreiben kannst, der Kontext versteht, der proaktiv Bescheid gibt, und der komplexere Anfragen ohne vorkonfigurierte Intents versteht.
+PicoClaw is the intelligent assistant *alongside* it. The one you can message on Telegram, that understands context, that proactively keeps you informed, and that handles more complex requests without pre-configured intents.
 
-**Die Kombination ist stärker als beide Teile einzeln.**
+**The combination is stronger than either part on its own.**
 
-HA macht was Automations am besten können: zuverlässig, schnell, lokal reagieren. PicoClaw macht was LLMs am besten können: natürliche Sprache verstehen, Kontext berücksichtigen, Zusammenfassungen schreiben.
+HA does what automations do best: respond reliably, fast, and locally. PicoClaw does what LLMs do best: understand natural language, consider context, write summaries.
 
-## Fazit
+## Conclusion
 
-Wenn du Home Assistant nutzt und dir manchmal wünschst, du könntest einfach *fragen* statt zu konfigurieren — probier PicoClaw aus. Schnapp dir einen Raspberry Pi Zero, installiere die Binary, trag deinen HA-Token ein, und du hast in 10 Minuten einen KI-Assistenten für dein Smart Home.
+If you use Home Assistant and sometimes wish you could just *ask* instead of configure — give PicoClaw a try. Grab a Raspberry Pi Zero, install the binary, plug in your HA token, and you've got an AI assistant for your smart home in 10 minutes.
 
-Kein großes LLM lokal, kein GPU-Server, kein komplexer Stack. Nur ein winziger Go-Binary, der die Arbeit macht, während HA im Hintergrund weiter seinen Job erledigt.
+No large local LLM, no GPU server, no complex stack. Just a tiny Go binary doing the work while HA quietly keeps doing its job in the background.
 
 GitHub: [sipeed/picoclaw](https://github.com/sipeed/picoclaw) | Website: [picoclaw.io](https://picoclaw.io)
