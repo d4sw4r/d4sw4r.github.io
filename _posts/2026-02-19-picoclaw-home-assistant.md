@@ -51,23 +51,31 @@ The entire stack boots in one second, draws barely any power, and runs stably 24
 
 ### Setup in Five Minutes
 
-Download PicoClaw as a binary and start it with a simple config file:
+Initialize PicoClaw with `picoclaw onboard` — it walks you through the setup and creates `~/.picoclaw/config.json`. Then edit the file directly:
 
-```yaml
-# picoclaw.yaml
-telegram:
-  token: "YOUR_BOT_TOKEN"
-  allowed_users: [12345678]
-
-llm:
-  provider: openai
-  model: gpt-4o-mini
-  api_key: "sk-..."
-
-tools:
-  - name: ha_rest
-    base_url: "http://homeassistant.local:8123"
-    token: "YOUR_HA_LONG_LIVED_TOKEN"
+```json
+// ~/.picoclaw/config.json
+{
+  "agents": {
+    "defaults": {
+      "workspace": "~/.picoclaw/workspace",
+      "model": "gpt-4o-mini"
+    }
+  },
+  "providers": {
+    "openai": {
+      "api_key": "sk-...",
+      "api_base": "https://api.openai.com/v1"
+    }
+  },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "token": "YOUR_BOT_TOKEN",
+      "allow_from": ["YOUR_TELEGRAM_USER_ID"]
+    }
+  }
+}
 ```
 
 Done. That's all it takes.
@@ -117,23 +125,20 @@ PicoClaw gets this API as a tool, and the LLM decides on its own when and with w
 
 ### 4. Cron Jobs for Energy Reports
 
-A daily summary of yesterday's power consumption delivered to Telegram at 7:30 AM — sounds like a lot of work. With PicoClaw, it's a one-liner:
+A daily summary of yesterday's power consumption delivered to Telegram at 7:30 AM — sounds like a lot of work. With PicoClaw, it's straightforward: you can tell the bot directly via chat to run something daily, or use an external scheduler like systemd timers or crontab that calls `picoclaw agent -m "..."`:
 
-```yaml
-crons:
-  - schedule: "30 7 * * *"
-    prompt: >
-      Query the electricity meter (sensor.power_meter_yesterday_kwh) and 
-      the solar yield (sensor.solar_yesterday_kwh).
-      Write a short summary in English of whether we produced more 
-      or consumed more power.
+```bash
+# /etc/cron.d/picoclaw-energy-report
+30 7 * * * pi picoclaw agent -m "Query the power meter (sensor.power_meter_yesterday_kwh) and solar yield (sensor.solar_yesterday_kwh). Write a short summary of whether we consumed or produced more power yesterday and send it via Telegram."
 ```
 
 The LLM formats the report, calculates the difference, and you get a meaningful morning message instead of raw sensor values.
 
 ### 5. Webhook Trigger: HA → PicoClaw → Action
 
-Home Assistant can fire webhooks — and PicoClaw can receive them. Example: when the motion sensor triggers at 3 AM, instead of a dumb notification, the agent should *evaluate* whether this is suspicious (is nobody home according to Presence Detection?) and react accordingly.
+Home Assistant can trigger external actions — and PicoClaw can be called via CLI from HA automations using a simple shell command. Example: when the motion sensor triggers at 3 AM, instead of a dumb notification, the agent should *evaluate* whether this is suspicious (is nobody home according to Presence Detection?) and react accordingly.
+
+In your HA automation:
 
 ```yaml
 # In Home Assistant: Automation
@@ -142,15 +147,19 @@ trigger:
     entity_id: binary_sensor.hallway_motion
     to: "on"
 action:
-  - service: rest_command.picoclaw_webhook
+  - service: shell_command.notify_picoclaw
     data:
-      event: "motion_detected"
-      sensor: "binary_sensor.hallway_motion"
-      presence: "{{ states('input_boolean.someone_home') }}"
-      time: "{{ now().strftime('%H:%M') }}"
+      message: "Motion detected at 03:00, presence: {{ states('input_boolean.someone_home') }}"
 ```
 
-PicoClaw receives the webhook, sends the data to the LLM, and it decides: trigger an alarm, turn on the lights, or simply ignore it. Context-based. Not rule-based.
+And in HA `configuration.yaml`:
+
+```yaml
+shell_command:
+  notify_picoclaw: "ssh pi@picoclaw-device 'picoclaw agent -m \"{{ message }}\"'"
+```
+
+PicoClaw receives the message via CLI, sends the data to the LLM, and it decides: trigger an alarm, turn on the lights, or simply ignore it. Context-based. Not rule-based.
 
 ## Technical Integration: HA Long-Lived Token
 
