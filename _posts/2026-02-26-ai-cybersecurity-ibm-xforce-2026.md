@@ -4,9 +4,10 @@ description: "IBM's freshly released X-Force Threat Intelligence Index 2026 pain
 date: 2026-02-26 09:00
 categories: [security, ai]
 tags: ["security", "cybersecurity", "ai", "ibm", "threat-intelligence", "developers"]
+image: /assets/img/ai-cybersecurity-2026.png
 ---
 
-![AI Cybersecurity Threats](/assets/img/openclaw-cron.png "AI Is Now a Weapon")
+![AI Cybersecurity Threats](/assets/img/ai-cybersecurity-2026.png "AI Is Now a Weapon")
 
 ---
 
