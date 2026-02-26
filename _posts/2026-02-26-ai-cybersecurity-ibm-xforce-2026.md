@@ -7,9 +7,6 @@ tags: ["security", "cybersecurity", "ai", "ibm", "threat-intelligence", "develop
 image: /assets/img/ai-cybersecurity-2026.png
 ---
 
-![AI Cybersecurity Threats](/assets/img/ai-cybersecurity-2026.png "AI Is Now a Weapon")
-
----
 
 ## AI Is Now a Weapon: What the IBM X-Force 2026 Report Means for Developers
 
