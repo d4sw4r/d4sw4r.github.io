@@ -406,7 +406,7 @@ Within minutes, Flux rebuilds every controller, every config, and every app from
 
 In a future part we'll look at:
 
-- **SOPS** for encrypting secrets in Git, so `secrets.yaml` and API tokens can live in the repo too
+- **SOPS** for encrypting secrets in Git, so `secrets.yaml` and API tokens can live in the repo too. This is now **[Part 3]({% post_url 2026-11-21-talos-flux-sops-age-secrets %})**.
 - cluster upgrades with Talos + Flux
 - expanding to more nodes
 - observability with Hubble & Prometheus
