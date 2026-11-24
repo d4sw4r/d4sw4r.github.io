@@ -4,6 +4,9 @@ description: "Pin Talos and Kubernetes versions in Git, let Renovate open the up
 date: 2026-11-25 08:00 +0100
 categories: [kubernetes, gitops]
 tags: [talos, kubernetes, renovate, fluxcd, upgrades, etcd, gitops, sops, age]
+image:
+  path: /assets/img/talos-upgrades-gitops.png
+  alt: Talos and Kubernetes upgrades the GitOps way with Renovate and talosctl
 ---
 
 In **[Part 1]({% post_url 2026-11-19-talos-hetzner-bare-metal-cilium %})** we brought up a single-node Talos cluster on Hetzner bare metal with Cilium. **[Part 2]({% post_url 2026-11-20-talos-hetzner-fluxcd-gitops %})** handed the cluster over to FluxCD, and **[Part 3]({% post_url 2026-11-21-talos-flux-sops-age-secrets %})** moved every secret into Git, encrypted with SOPS and age.
