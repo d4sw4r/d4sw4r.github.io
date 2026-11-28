@@ -263,6 +263,7 @@ If someone matches several grants, they get several entries, and the app merges 
 
 The whole thing is one file. It builds against `tailscale.com v1.106.1` (which needs Go 1.27):
 
+{% raw %}
 ```go
 // wol: a Wake-on-LAN button that lives on your tailnet.
 // No login page, no passwords: who you are comes from WireGuard,
@@ -386,6 +387,7 @@ func wake(mac string) error {
 	return err
 }
 ```
+{% endraw %}
 
 What's happening:
 
